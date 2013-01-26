@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Chad Remesch"]
   gem.email         = ["chad@remesch.com"]
   gem.description   = %q{Event driven network IO for the Tribe gem.}
-  gem.summary       = %q{Quickly create network servers using the EventMachine and Tribe gems.}
+  gem.summary       = %q{Quickly create network servers using EventMachine and Tribe.}
   gem.homepage      = "https://github.com/chadrem/tribe_em"
 
   gem.files         = `git ls-files`.split($/)
