@@ -1,6 +1,6 @@
-# Tribe::EM
+# Tribe EM
 
-TODO: Write a gem description
+Tribe EM is a Ruby gem that adds network IO to the [Tribe] (https://github.com/chadrem/tribe "Tribe") gem.
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Coming soon.
 
 ## Contributing
 
