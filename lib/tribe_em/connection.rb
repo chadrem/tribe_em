@@ -3,20 +3,25 @@ module Tribe
     class Connection < ::EM::Connection
       include Tribe::Actable
 
-      def initialize(options = {})
-        init_actable(options)
-      end
-
+      # EM callback.  Don't call directly.
       def post_init
         enqueue(:post_init, nil)
       end
 
+      # EM callback.  Don't call directly.
       def receive_data(data)
         enqueue(:receive_data, data)
       end
 
+      # EM callback.  Don't call directly.
       def unbind
         enqueue(:unbind, nil)
+      end
+
+      private
+
+      def initialize(options = {})
+        init_actable(options)
       end
 
       def process_event(event)
