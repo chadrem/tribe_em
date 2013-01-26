@@ -1,6 +1,6 @@
 # Tribe EM
 
-Tribe EM is a Ruby gem that adds network IO to [Tribe] (https://github.com/chadrem/tribe "Tribe").
+Tribe EM is a Ruby gem that adds event-driven network IO to [Tribe] (https://github.com/chadrem/tribe "Tribe").
 It is based on [EventMachine] (http://rubyeventmachine.com/ "EventMachine").
 
 ## Installation
