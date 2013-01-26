@@ -8,7 +8,12 @@ require 'tribe_em/tcp_server'
 module Tribe
   module EM
     def self.start
-      @em_thread = Thread.new { ::EM.run {} }
+      @em_thread = Thread.new do
+        ::EM.run do
+          ::EM.kqueue = true if ::EM.kqueue?
+          ::EM.epoll = true if ::EM.epoll?
+        end
+      end
 
       return nil
     end
