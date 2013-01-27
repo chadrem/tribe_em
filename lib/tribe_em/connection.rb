@@ -25,13 +25,13 @@ module Tribe
       def exception_handler(e)
         super
 
-        close # Don't forget to call this if you override!
+        close # Don't forget to call close if you override!
       end
 
       def shutdown_handler(event)
         super
 
-        close # Don't forget to call this if you override!
+        close # Don't forget to call close if you override!
       end
 
       def write(data)
