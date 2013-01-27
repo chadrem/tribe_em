@@ -19,6 +19,30 @@ Or install it yourself as:
 
 ## Usage
 
+    # Create a custom connection actor class.
+    class MyConn < Tribe::EM::Connection
+      private
+      
+      def on_post_init(event)
+        puts "Actor (#{identifier}) connected to client using thread (#{Thread.current.object_id})."
+      end
+
+      def on_receive_data(event)
+        puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
+      end
+
+      def on_unbind(event)
+        puts "Actor (#{identifier}) disconnected from client using thread (#{Thread.current.object_id})."
+      end
+    end
+    
+    # Create your server actor.
+    server = Tribe::EM::TcpServer.new('localhost', 9000, MyConn)
+    
+You can test the above code using a utility such as telnet (telnet localhost 9000), entering some text, and then killing telnet.
+
+Create the server instance actor
+
 Coming soon.
 
 ## Contributing
