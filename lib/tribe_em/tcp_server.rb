@@ -22,7 +22,7 @@ module Tribe
       end
 
       def shutdown_handler(event)
-        stop_server
+        stop_listener if @server_sig
       end
 
       def start_listener
