@@ -46,7 +46,7 @@ You can test the below code using a utility such as telnet (telnet localhost 900
 ## Customization
 
 Tribe EM is designed to be easily customized through inheritence of Tribe::EM::Connection.
-This base class will proxy communication between EventMachine and Tribe's actor system.
+Communication between EventMachine and the Tribe actor system is provided by Tribe::EM::ActorProxy.
 
 ## TODO - missing features
 
