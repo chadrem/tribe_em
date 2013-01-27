@@ -31,7 +31,7 @@ You can test the below code using a utility such as telnet (telnet localhost 900
 
       def on_receive_data(event)
         puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
-        send_data(event.data)
+        write(event.data)
       end
 
       def on_unbind(event)
