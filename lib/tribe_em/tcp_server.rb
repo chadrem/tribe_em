@@ -21,6 +21,14 @@ module Tribe
         stop_listener
       end
 
+      def on_listener_started(event)
+        @server_sig = event.data
+      end
+
+      def on_listener_stopped(event)
+        @server_sig = nil
+      end
+
       def shutdown_handler(event)
         stop_listener if @server_sig
       end
@@ -28,14 +36,20 @@ module Tribe
       def start_listener
         return if @server_sig
 
-        @server_sig = ::EM.start_server(@ip, @port, @conn_class)
+        ::EM.schedule do
+          sig = ::EM.start_server(@ip, @port, @conn_class)
+          enqueue(:listener_started, sig)
+        end
       end
 
       def stop_listener
         return unless @server_sig
 
-        ::EM.stop_server(@server_sig)
-        @server_sig = nil
+        sig = @server_sig
+        ::EM.schedule do
+          ::EM.stop_server(sig)
+          enqueue(:listener_stopped)
+        end
       end
     end
   end
