@@ -19,6 +19,8 @@ Or install it yourself as:
 
 ## Usage
 
+You can test the below code using a utility such as telnet (telnet localhost 9000), entering some text, and then killing telnet.
+
     # Create a custom connection actor class.
     class MyConn < Tribe::EM::Connection
       private
@@ -38,12 +40,6 @@ Or install it yourself as:
     
     # Create your server actor.
     server = Tribe::EM::TcpServer.new('localhost', 9000, MyConn)
-    
-You can test the above code using a utility such as telnet (telnet localhost 9000), entering some text, and then killing telnet.
-
-Create the server instance actor
-
-Coming soon.
 
 ## Contributing
 
