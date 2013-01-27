@@ -41,6 +41,12 @@ You can test the below code using a utility such as telnet (telnet localhost 900
     # Create your server actor.
     server = Tribe::EM::TcpServer.new('localhost', 9000, MyConn)
 
+## Customization
+
+Tribe EM is designed to be easily customized through inheritence of Tribe::EM::Connection.
+This base class acts as a proxy between EventMachine's connection callbacks and Tribe's actor events.
+Most EventMachine based protocol implementations can easily be ported to Tribe EM by following the patterns found in this class.
+
 ## TODO - missing features
 
 - Commonly used server protocols such as HTTP.
