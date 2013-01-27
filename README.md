@@ -46,6 +46,7 @@ You can test the below code using a utility such as telnet (telnet localhost 900
 - Commonly used server protocols such as HTTP.
 - Wrappers for all of the server protocols that come with EventMachine's lib/em/protocols directory.
 - Client socket integration such as when an actor wants to make a outgoing web service request.
+- Integration with my [AMF Socket - Ruby] (https://github.com/chadrem/amf_socket_ruby "AMF Socket - Ruby") gem.
 
 ## Contributing
 
