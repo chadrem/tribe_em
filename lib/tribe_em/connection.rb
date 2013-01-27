@@ -25,13 +25,13 @@ module Tribe
       def exception_handler(e)
         super
 
-        close
+        close # Don't forget to call this if you override!
       end
 
       def shutdown_handler(event)
-        puts "MyActor (#{identifier}) is shutting down.  Put cleanup code here."
+        super
 
-        close
+        close # Don't forget to call this if you override!
       end
 
       def write(data)
