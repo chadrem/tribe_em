@@ -22,7 +22,7 @@ Or install it yourself as:
 You can test the below code using a utility such as telnet (telnet localhost 9000), entering some text, and then killing telnet.
 
     # Create a custom connection actor class.
-    class MyConn < Tribe::EM::Connection
+    class EchoConnection < Tribe::EM::Connection
       private
       
       def on_post_init(event)
@@ -31,6 +31,7 @@ You can test the below code using a utility such as telnet (telnet localhost 900
 
       def on_receive_data(event)
         puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
+        send_data(event.data)
       end
 
       def on_unbind(event)
@@ -39,7 +40,7 @@ You can test the below code using a utility such as telnet (telnet localhost 900
     end
     
     # Create your server actor.
-    server = Tribe::EM::TcpServer.new('localhost', 9000, MyConn)
+    server = Tribe::EM::TcpServer.new('localhost', 9000, EchoConnection)
 
 ## Customization
 
