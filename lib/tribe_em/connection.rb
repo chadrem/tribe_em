@@ -24,7 +24,7 @@ module Tribe
       end
 
       def shutdown_handler(event)
-        close
+        close(true)
       end
 
       def write(data)
