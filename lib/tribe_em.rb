@@ -2,6 +2,7 @@ require 'tribe'
 require 'eventmachine'
 
 require 'tribe_em/version'
+require 'tribe_em/actor_proxy'
 require 'tribe_em/connection'
 require 'tribe_em/tcp_server'
 
@@ -12,6 +13,10 @@ module Tribe
         ::EM.run do
           ::EM.kqueue = true if ::EM.kqueue?
           ::EM.epoll = true if ::EM.epoll?
+
+          ::EM.error_handler do |e|
+            puts "EXCEPTION: #{e.message}\n#{e.backtrace.join("\n")}--"
+          end
         end
       end
 

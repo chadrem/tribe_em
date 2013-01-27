@@ -1,27 +1,12 @@
 module Tribe
   module EM
-    class Connection < ::EM::Connection
-      include Tribe::Actable
-
-      # EM callback.  Don't call directly.
-      def post_init
-        enqueue(:post_init, nil)
-      end
-
-      # EM callback.  Don't call directly.
-      def receive_data(data)
-        enqueue(:receive_data, data)
-      end
-
-      # EM callback.  Don't call directly.
-      def unbind
-        enqueue(:unbind, nil)
-      end
-
+    class Connection < Tribe::Actor
       private
 
       def initialize(options = {})
-        init_actable(options)
+        @actor_proxy = options[:actor_proxy] || 'You must provide an actor proxy.'
+
+        super
       end
 
       def on_post_init(event)
@@ -30,6 +15,7 @@ module Tribe
 
       def on_receive_data(event)
         puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
+        write(event.data)
       end
 
       def on_unbind(event)
@@ -38,24 +24,22 @@ module Tribe
 
       def exception_handler(e)
         super
+
         close
       end
 
       def shutdown_handler(event)
         puts "MyActor (#{identifier}) is shutting down.  Put cleanup code here."
+
         close
       end
 
-      def close(after_writing = false)
-        ::EM.schedule { close_connection(after_writing) }
-
-        return nil
+      def write(data)
+        @actor_proxy.write(data)
       end
 
-      def write(data)
-        ::EM.schedule { send_data(data) }
-
-        return nil
+      def close(after_writing = false)
+        @actor_proxy.close(after_writing)
       end
     end
   end

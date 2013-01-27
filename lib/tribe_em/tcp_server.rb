@@ -3,12 +3,12 @@ module Tribe
     class TcpServer < Tribe::Actor
       private
 
-      def initialize(ip, port, conn_class, options = {})
+      def initialize(ip, port, actor_class, options = {})
         super(options)
 
         @ip = ip
         @port = port
-        @conn_class = conn_class
+        @actor_class = actor_class
 
         start_listener
       end
@@ -37,7 +37,7 @@ module Tribe
         return if @server_sig
 
         ::EM.schedule do
-          sig = ::EM.start_server(@ip, @port, @conn_class)
+          sig = ::EM.start_server(@ip, @port, Tribe::EM::ActorProxy, @actor_class, { :logger => @logger })
           enqueue(:listener_started, sig)
         end
       end
