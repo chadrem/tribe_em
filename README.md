@@ -46,15 +46,14 @@ You can test the below code using a utility such as telnet (telnet localhost 900
 ## Customization
 
 Tribe EM is designed to be easily customized through inheritence of Tribe::EM::Connection.
-This base class acts as a proxy between EventMachine's connection callbacks and Tribe's actor events.
-Most EventMachine based protocol implementations can easily be ported to Tribe EM by following the patterns found in this class.
+This base class will proxy communication between EventMachine and Tribe's actor system.
 
 ## TODO - missing features
 
 - Commonly used server protocols such as HTTP.
-- Wrappers for all of the server protocols that come with EventMachine's lib/em/protocols directory.
-- Client socket integration such as when an actor wants to make a outgoing web service request.
 - Integration with my [AMF Socket] (https://github.com/chadrem/amf_socket_ruby "AMF Socket") gem.
+- Client side sockets.
+
 
 ## Contributing
 
