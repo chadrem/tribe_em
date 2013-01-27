@@ -39,6 +39,10 @@ You can test the below code using a utility such as telnet (telnet localhost 900
         puts "Actor (#{identifier}) disconnected from client using thread (#{Thread.current.object_id})."
         super
       end
+      
+      def shutdown_handler(event)
+        close(true) # Wait for pending data to be sent.
+      end
     end
     
     # Create your server actor.
