@@ -4,34 +4,27 @@ module Tribe
       private
 
       def initialize(options = {})
-        @actor_proxy = options[:actor_proxy] || 'You must provide an actor proxy.'
+        @actor_proxy = options[:actor_proxy] || raise('You must provide an actor proxy.')
 
         super
       end
 
       def on_post_init(event)
-        puts "Actor (#{identifier}) connected to client using thread (#{Thread.current.object_id})."
       end
 
       def on_receive_data(event)
-        puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
-        write(event.data)
       end
 
       def on_unbind(event)
-        puts "Actor (#{identifier}) disconnected from client using thread (#{Thread.current.object_id})."
+        enqueue(:shutdown)
       end
 
       def exception_handler(e)
-        super
-
-        close # Don't forget to call close if you override!
+        close
       end
 
       def shutdown_handler(event)
-        super
-
-        close # Don't forget to call close if you override!
+        close
       end
 
       def write(data)

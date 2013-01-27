@@ -4,6 +4,7 @@ require 'eventmachine'
 require 'tribe_em/version'
 require 'tribe_em/actor_proxy'
 require 'tribe_em/connection'
+require 'tribe_em/dedicated_connection'
 require 'tribe_em/tcp_server'
 
 module Tribe
