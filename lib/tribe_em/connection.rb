@@ -24,26 +24,15 @@ module Tribe
         init_actable(options)
       end
 
-      def process_event(event)
-        case event.command
-        when :post_init
-          post_init_handler(event)
-        when :receive_data
-          receive_data_handler(event)
-        when :unbind
-          unbind_handler(event)
-        end
-      end
-
-      def post_init_handler(event)
+      def on_post_init(event)
         puts "Actor (#{identifier}) connected to client using thread (#{Thread.current.object_id})."
       end
 
-      def receive_data_handler(event)
+      def on_receive_data(event)
         puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
       end
 
-      def unbind_handler(event)
+      def on_unbind(event)
         puts "Actor (#{identifier}) disconnected from client using thread (#{Thread.current.object_id})."
       end
     end

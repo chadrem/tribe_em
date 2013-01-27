@@ -13,29 +13,16 @@ module Tribe
         start_listener
       end
 
-      def process_event(event)
-        case event.command
-        when :start_listener
-          start_listener_handler(event)
-        when :stop_listener
-          stop_listener_handler(event)
-        end
-      end
-
-      def start_listener_handler(event)
+      def on_start_listener(event)
         start_listener
       end
 
-      def stop_listener_handler(event)
+      def on_stop_listener(event)
         stop_listener
       end
 
       def shutdown_handler(event)
         stop_server
-      end
-
-      def set_server_sig_handler(event)
-        @server_sig = event.data
       end
 
       def start_listener
