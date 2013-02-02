@@ -27,12 +27,14 @@ You can test the below code using a utility such as telnet (telnet localhost 900
       
       def on_post_init(event)
         puts "Actor (#{identifier}) connected to client using thread (#{Thread.current.object_id})."
+        super
       end
 
       def on_receive_data(event)
         puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
         write(event.data)
         enqueue(:shutdown)
+        super
       end
 
       def on_unbind(event)
