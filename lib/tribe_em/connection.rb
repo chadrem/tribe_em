@@ -25,10 +25,14 @@ module Tribe
       end
 
       def exception_handler(e)
+        super
+        
         close
       end
 
       def shutdown_handler(event)
+        super
+        
         close(true)
       end
 
