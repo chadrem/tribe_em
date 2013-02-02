@@ -1,7 +1,7 @@
 module Tribe
   module EM
     class Connection < Tribe::Actor
-      # The Proxy class is what cleanly separates the EM connection and Tribe actor.
+      # The Proxy class is what separates the EM connection and Tribe actor.
       def self.proxy_class
         return Tribe::EM::ActorProxy
       end
@@ -14,23 +14,30 @@ module Tribe
         super
       end
 
+      # Override and call super as necessary.
       def on_post_init(event)
       end
 
+      # Override and call super as necessary.
       def on_receive_data(event)
       end
 
+      # Override and call super as necessary.
       def on_unbind(event)
         enqueue(:shutdown)
       end
 
+      # Override and call super as necessary.
       def exception_handler(e)
         super
+
         close
       end
 
+      # Override and call super as necessary.
       def shutdown_handler(event)
         super
+
         close(true)
       end
 

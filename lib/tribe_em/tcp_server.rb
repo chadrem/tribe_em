@@ -13,23 +13,30 @@ module Tribe
         start_listener
       end
 
+      # Override and call super as necessary.
       def on_start_listener(event)
         start_listener
       end
 
+      # Override and call super as necessary.
       def on_stop_listener(event)
         stop_listener
       end
 
+      # Override and call super as necessary.
       def on_listener_started(event)
         @server_sig = event.data
       end
 
+      # Override and call super as necessary.
       def on_listener_stopped(event)
         @server_sig = nil
       end
 
+      # Override and call super as necessary.
       def shutdown_handler(event)
+        super
+
         stop_listener if @server_sig
       end
 
