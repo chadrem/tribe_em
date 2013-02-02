@@ -6,9 +6,10 @@ module Tribe
       def initialize(ip, port, actor_class, options = {})
         super(options)
 
-        @ip = ip
-        @port = port
-        @actor_class = actor_class
+        @ip = ip || raise('IP is required.')
+        @port = port || raise('Port is required.')
+        @actor_class = actor_class || raise('Actor class is required.')
+        @proxy_class = options[:proxy_class] || Tribe::EM::ActorProxy
 
         start_listener
       end
@@ -37,7 +38,7 @@ module Tribe
         return if @server_sig
 
         ::EM.schedule do
-          sig = ::EM.start_server(@ip, @port, Tribe::EM::ActorProxy, @actor_class, { :logger => @logger })
+          sig = ::EM.start_server(@ip, @port, @proxy_class, @actor_class, { :logger => @logger })
           enqueue(:listener_started, sig)
         end
       end
