@@ -1,6 +1,11 @@
 module Tribe
   module EM
     class Connection < Tribe::Actor
+      # The Proxy class is what cleanly separates the EM connection and Tribe actor.
+      def self.proxy_class
+        return Tribe::EM::ActorProxy
+      end
+
       private
 
       def initialize(options = {})
