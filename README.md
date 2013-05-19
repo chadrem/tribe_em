@@ -56,7 +56,7 @@ Communication between EventMachine and the Tribe actor system is provided by Tri
 Tribe EM has native TCP server and connection classes built in.
 Other protocol implementations can be found below.
 Note that some impmementations are marked as native while others are marked as wrappers.
-Native implementations are specifically designed to for Tribe EM and thus push most to the actor threads.
+Native implementations are specifically designed to for Tribe EM and thus push most work to the actor threads.
 Wrapper implementations wrap existing EM libraries and usually do more work in the EM thread.
 This means that native implmentations (when used with real threads via JRuby) will scale better on multi-core systems.
 None of this really matters much with MRI Ruby since it has a global interpretter lock.
