@@ -24,7 +24,7 @@ module Tribe
 
       # Override and call super as necessary.
       def on_unbind(event)
-        enqueue(:shutdown)
+        shutdown!
       end
 
       # Override and call super as necessary.

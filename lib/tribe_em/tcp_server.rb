@@ -45,7 +45,7 @@ module Tribe
 
         ::EM.schedule do
           sig = ::EM.start_server(@ip, @port, @actor_class.proxy_class, @actor_class, { :logger => @logger })
-          enqueue(:listener_started, sig)
+          message!(:listener_started, sig)
         end
       end
 
@@ -55,7 +55,7 @@ module Tribe
         sig = @server_sig
         ::EM.schedule do
           ::EM.stop_server(sig)
-          enqueue(:listener_stopped)
+          message!(:listener_stopped)
         end
       end
     end
