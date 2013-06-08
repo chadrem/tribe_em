@@ -22,29 +22,30 @@ Or install it yourself as:
 You can test the below code using a utility such as telnet (telnet localhost 9000), entering some text, and then killing telnet.
 
     # Create a custom connection actor class.
-    class EchoConnection < Tribe::EM::Connection
+    class EchoConn < Tribe::EM::Connection
       private
-      
-      def on_post_init(event)
+      def exception_handler(e)
+        super
+        puts concat_e("EchoConn (#{identifier}) died.", e)
+      end
+
+      def post_init_handler
         puts "Actor (#{identifier}) connected to client using thread (#{Thread.current.object_id})."
-        super
       end
 
-      def on_receive_data(event)
-        puts "Actor (#{identifier}) received data (#{event.data}) using thread (#{Thread.current.object_id})."
-        write(event.data)
-        enqueue(:shutdown)
-        super
+      def receive_data_handler(data)
+        puts "Actor (#{identifier}) received data (#{data}) using thread (#{Thread.current.object_id})."
+        write(data)
+        shutdown!
       end
 
-      def on_unbind(event)
+      def unbind_handler
         puts "Actor (#{identifier}) disconnected from client using thread (#{Thread.current.object_id})."
-        super
       end
     end
-    
+
     # Create your server actor.
-    server = Tribe::EM::TcpServer.new('localhost', 9000, EchoConnection)
+    server = Tribe::EM::TcpServer.new('localhost', 9000, EchoConn)
 
 ## Customization
 

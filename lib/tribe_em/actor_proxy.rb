@@ -15,7 +15,7 @@ module Tribe
       end
 
       #
-      # EM Callbacks.  Don't call these directly.
+      # EM Callbacks.
       #
 
       public
