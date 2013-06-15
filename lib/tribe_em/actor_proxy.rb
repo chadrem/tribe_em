@@ -1,6 +1,6 @@
 # Attempt to provide thread-safe communication between EventMachine and Tribe:
 # 1. Always use EM.schedule to push work to the reactor thread.
-# 2. Always use @actor.message! to push work to the actor's thread pool.
+# 2. Always use @actor.deliver_message! to push work to the actor's thread pool.
 
 module Tribe
   module EM
@@ -21,15 +21,15 @@ module Tribe
       public
 
       def post_init
-        @actor.message!(:post_init, nil)
+        @actor.deliver_message!(:post_init, nil)
       end
 
       def receive_data(data)
-        @actor.message!(:receive_data, data)
+        @actor.deliver_message!(:receive_data, data)
       end
 
       def unbind
-        @actor.message!(:unbind, nil)
+        @actor.deliver_message!(:unbind, nil)
       end
 
       #
